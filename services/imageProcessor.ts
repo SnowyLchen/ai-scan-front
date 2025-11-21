@@ -1,0 +1,1 @@
+// File deleted. Replaced by services/scanService.ts
