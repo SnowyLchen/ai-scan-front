@@ -12,6 +12,7 @@ export interface BackendScanResult {
   img: string;         // Original image URL from server or base64
   predict_img: string; // Image with detection visualization
   crop_img: string;    // Final cropped image
+  all_crop_imgs: string;    // All cropped images
 }
 
 export interface ProcessedResult {
