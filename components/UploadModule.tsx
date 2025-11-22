@@ -13,11 +13,11 @@ interface Props {
   isCollapsed?: boolean;
 }
 
-const UploadModule: React.FC<Props> = ({ 
-  onAddFiles, 
-  onAddGenerated, 
-  items, 
-  onRemove, 
+const UploadModule: React.FC<Props> = ({
+  onAddFiles,
+  onAddGenerated,
+  items,
+  onRemove,
   onStartProcessing,
   isCollapsed = false
 }) => {
@@ -52,7 +52,7 @@ const UploadModule: React.FC<Props> = ({
   if (!isExpanded) {
     return (
       <section className="w-full max-w-5xl mx-auto bg-white rounded-xl shadow-sm border border-slate-200 animate-fade-in overflow-hidden">
-        <div 
+        <div
           className="p-4 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors"
           onClick={() => setIsExpanded(true)}
         >
@@ -67,7 +67,7 @@ const UploadModule: React.FC<Props> = ({
               <span>已上传 {items.length} 个文件</span>
             </div>
           </div>
-          
+
           <div className="flex items-center gap-2 text-xs font-medium text-primary">
             <span>展开编辑</span>
             <ChevronDown className="w-4 h-4" />
@@ -86,7 +86,7 @@ const UploadModule: React.FC<Props> = ({
           <h2 className="text-xl font-bold text-slate-800">上传扫描件</h2>
         </div>
         {items.length > 0 && isCollapsed && (
-           <button 
+           <button
              onClick={() => setIsExpanded(false)}
              className="text-sm text-slate-500 hover:text-slate-700 flex items-center gap-1"
            >
@@ -94,12 +94,12 @@ const UploadModule: React.FC<Props> = ({
            </button>
         )}
       </div>
-      
+
       {/* Upload Area */}
       <div className="bg-white rounded-xl shadow-sm border-2 border-dashed border-slate-300 p-8 text-center hover:border-primary transition-colors relative group">
-        <input 
-          type="file" 
-          multiple 
+        <input
+          type="file"
+          multiple
           accept="image/*"
           onChange={handleFileChange}
           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
@@ -117,13 +117,12 @@ const UploadModule: React.FC<Props> = ({
 
       {/* AI Generation Option */}
       <div className="flex justify-center">
-        <button 
-          onClick={handleGenerate}
+        <button
           disabled={isGenerating}
           className="flex items-center gap-2 text-xs text-slate-600 bg-white border border-slate-200 px-4 py-2 rounded-full hover:bg-slate-50 hover:text-primary transition-all shadow-sm"
         >
           {isGenerating ? <Loader2 className="w-3 h-3 animate-spin" /> : <Sparkles className="w-3 h-3 text-purple-500" />}
-          <span>使用 Gemini AI 生成测试样本</span>
+          <span>扫描件边界预测自动裁剪</span>
         </button>
       </div>
 
@@ -132,19 +131,19 @@ const UploadModule: React.FC<Props> = ({
         <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 animate-fade-in">
           <div className="flex justify-between items-center mb-4">
             <h4 className="font-medium text-slate-700">待处理文件 ({items.length})</h4>
-            <button 
+            <button
               onClick={() => items.forEach(i => onRemove(i.id))}
               className="text-xs text-red-500 hover:text-red-700"
             >
               清空列表
             </button>
           </div>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-8 gap-3">
             {items.map((item) => (
               <div key={item.id} className="group relative aspect-[3/4] rounded-lg overflow-hidden bg-slate-100 border border-slate-200">
                 <img src={item.originalUrl} alt="preview" className="w-full h-full object-cover" />
-                <button 
+                <button
                   onClick={() => onRemove(item.id)}
                   className="absolute top-1 right-1 bg-black/50 hover:bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                 >
@@ -153,7 +152,7 @@ const UploadModule: React.FC<Props> = ({
               </div>
             ))}
           </div>
-          
+
           <div className="mt-6 flex justify-end">
              <button
               onClick={onStartProcessing}
